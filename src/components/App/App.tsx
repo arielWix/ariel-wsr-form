@@ -17,6 +17,8 @@ import {
   AddItem,
 } from 'wix-style-react';
 
+import DataHooks from './DataHooks';
+
 import DeleteSmall from 'wix-ui-icons-common/DeleteSmall';
 
 const colorOptions = [
@@ -67,11 +69,11 @@ const SavedData = ({ firstName, lastName, color }: ISavedData) => (
       <Layout>
         <Cell>
           <Heading appearance="H6">FIRST NAME</Heading>
-          <Text>{firstName}</Text>
+          <Text dataHook={DataHooks.SAVED_FIRST_NAME_INPUT}>{firstName}</Text>
         </Cell>
         <Cell>
           <Heading appearance="H6">LAST NAME</Heading>
-          <Text>{lastName}</Text>
+          <Text dataHook={DataHooks.SAVED_FIRST_NAME_INPUT}>{lastName}</Text>
         </Cell>
         <Cell>
           <Heading appearance="H6">FAVORITE COLOR</Heading>
@@ -132,10 +134,7 @@ export default class extends React.Component {
       !!this.state.firstName ||
       !!this.state.lastName ||
       this.state.colorSelectedId !== -1;
-    const canSubmit =
-      !!this.state.firstName &&
-      !!this.state.lastName &&
-      this.state.colorSelectedId !== -1;
+    const canSubmit = !!this.state.firstName && !!this.state.lastName;
 
     return (
       <WixStyleReactProvider>
@@ -149,6 +148,7 @@ export default class extends React.Component {
                   <Button
                     disabled={!canClear}
                     priority="secondary"
+                    dataHook={DataHooks.CLEAR_BUTTON}
                     onClick={() => {
                       this.setState({
                         firstName: '',
@@ -163,12 +163,16 @@ export default class extends React.Component {
                 <Box>
                   <Button
                     disabled={!canSubmit}
+                    dataHook={DataHooks.SUBMIT_BUTTON}
                     onClick={() => {
                       this.setState({
                         savedData: {
                           firstName: this.state.firstName,
                           lastName: this.state.lastName,
-                          color: colorOptions[this.state.colorSelectedId].value,
+                          color:
+                            this.state.colorSelectedId !== -1
+                              ? colorOptions[this.state.colorSelectedId].value
+                              : '',
                         },
                       });
                     }}
@@ -193,6 +197,7 @@ export default class extends React.Component {
                             <FormField label="First name" required>
                               <Input
                                 value={this.state.firstName}
+                                dataHook={DataHooks.FIRST_NAME_INPUT}
                                 onChange={(e) =>
                                   this.setState({ firstName: e.target.value })
                                 }
@@ -203,6 +208,7 @@ export default class extends React.Component {
                             <FormField label="Last name" required>
                               <Input
                                 value={this.state.lastName}
+                                dataHook={DataHooks.LAST_NAME_INPUT}
                                 onChange={(e) =>
                                   this.setState({ lastName: e.target.value })
                                 }
