@@ -53,6 +53,66 @@ const breadCrumbsItems = [
   },
 ];
 
+interface ISavedData {
+  firstName: string;
+  lastName: string;
+  color: string;
+}
+
+const SavedData = ({ firstName, lastName, color }: ISavedData) => (
+  <Card>
+    <Card.Header title="Saved data" />
+    <Card.Divider />
+    <Card.Content>
+      <Layout>
+        <Cell>
+          <Heading appearance="H6">FIRST NAME</Heading>
+          <Text>{firstName}</Text>
+        </Cell>
+        <Cell>
+          <Heading appearance="H6">LAST NAME</Heading>
+          <Text>{lastName}</Text>
+        </Cell>
+        <Cell>
+          <Heading appearance="H6">FAVORITE COLOR</Heading>
+          <Text>{color}</Text>
+        </Cell>
+      </Layout>
+    </Card.Content>
+  </Card>
+);
+
+interface IRoleDetails {
+  title: string;
+  experience: string;
+}
+
+const RoleData = ({ title, experience }: IRoleDetails) => (
+  <Card>
+    <Card.Header
+      title="Role details"
+      suffix={
+        <Button disabled priority="secondary">
+          Edit
+        </Button>
+      }
+    />
+    <Card.Divider />
+    <Card.Content>
+      <Layout>
+        <Cell>
+          <Heading appearance="H6">OFFICIAL TITLE</Heading>
+          <Text>{title}</Text>
+        </Cell>
+        <Cell>
+          <Heading appearance="H6">EXPERIENCE</Heading>
+          <Text>{experience}</Text>
+        </Cell>
+      </Layout>
+    </Card.Content>
+  </Card>
+);
+
 export default class extends React.Component {
   state = {
     firstName: '',
@@ -186,52 +246,18 @@ export default class extends React.Component {
               <Cell span={4}>
                 <Layout>
                   <Cell>
-                    <Card>
-                      <Card.Header
-                        title="Role details"
-                        suffix={
-                          <Button disabled priority="secondary">
-                            Edit
-                          </Button>
-                        }
-                      />
-                      <Card.Divider />
-                      <Card.Content>
-                        <Layout>
-                          <Cell>
-                            <Heading appearance="H6">OFFICIAL TITLE</Heading>
-                            <Text>{this.state.roleTitle}</Text>
-                          </Cell>
-                          <Cell>
-                            <Heading appearance="H6">EXPERIENCE</Heading>
-                            <Text>{this.state.roleExperience}</Text>
-                          </Cell>
-                        </Layout>
-                      </Card.Content>
-                    </Card>
+                    <RoleData
+                      title={this.state.roleTitle}
+                      experience={this.state.roleExperience}
+                    />
                   </Cell>
                   <Cell>
                     {this.state.savedData.firstName ? (
-                      <Card>
-                        <Card.Header title="Saved data" />
-                        <Card.Divider />
-                        <Card.Content>
-                          <Layout>
-                            <Cell>
-                              <Heading appearance="H6">FIRST NAME</Heading>
-                              <Text>{this.state.savedData.firstName}</Text>
-                            </Cell>
-                            <Cell>
-                              <Heading appearance="H6">LAST NAME</Heading>
-                              <Text>{this.state.savedData.lastName}</Text>
-                            </Cell>
-                            <Cell>
-                              <Heading appearance="H6">FAVORITE COLOR</Heading>
-                              <Text>{this.state.savedData.color}</Text>
-                            </Cell>
-                          </Layout>
-                        </Card.Content>
-                      </Card>
+                      <SavedData
+                        firstName={this.state.savedData.firstName}
+                        lastName={this.state.savedData.lastName}
+                        color={this.state.savedData.color}
+                      />
                     ) : null}
                   </Cell>
                 </Layout>
