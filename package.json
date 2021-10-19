@@ -37,7 +37,8 @@
     "express": "^4.17.1",
     "react": "16.12.0",
     "react-dom": "16.12.0",
-    "source-map-support": "^0.5.11"
+    "source-map-support": "^0.5.11",
+    "wix-ui-icons-common": "^2.0.375"
   },
   "devDependencies": {
     "@testing-library/react": "^11.2.5",
@@ -54,7 +55,8 @@
     "husky": "~4.2.1",
     "lint-staged": "^10.0.7",
     "puppeteer": "^5.5.0",
-    "typescript": "~4.1.2"
+    "typescript": "~4.1.2",
+    "wix-style-react": "^9.166.0"
   },
   "jest": {
     "preset": "@wix/jest-yoshi-preset"
